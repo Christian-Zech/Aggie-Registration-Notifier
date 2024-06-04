@@ -8,6 +8,6 @@ export default defineConfig({
       "/api": "http://localhost:5000"
     }
   },
-  base: "/",
+  base: "/aggie_course_notifier/",
   plugins: [react()],
 })
