@@ -2,7 +2,7 @@
   "name": "aggie_course_notifier",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Christian-Zech.github.io/react-gh-pages",
+  "homepage": "https://Christian-Zech.github.io/aggie_course_notifier",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
