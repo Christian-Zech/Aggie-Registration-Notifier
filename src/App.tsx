@@ -10,9 +10,9 @@ function App() {
   const [email, setEmail] = useState('')
   const [classData, setClassData] = useState([])
 
-  const insertIntoDatabase = () => {
+  const insertIntoDatabase = async () => {
 
-    axios.post("/api", {
+    await axios.post("/api", {
       row: {email: email, class_name: subject + "-" + classNumber, class_sections: section}
     }).then(response => {
         console.log(response.data["message"])
@@ -22,7 +22,7 @@ function App() {
   }
 
 
-  const handleClassSubmit = () => {
+  const handleClassSubmit = async () => {
 
     if (subject === '' || classNumber === '' || section === '' || email === '') {
       alert('Please fill out all fields')
@@ -42,8 +42,7 @@ function App() {
     setSubject('')
     setClassNumber('')
     setSection('')
-    insertIntoDatabase()
-
+    await insertIntoDatabase()
   }
 
   const checkClasses = () => {
@@ -126,7 +125,7 @@ function App() {
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email"/>
           </div>
           <div className="class-submit">
-            <button onClick={() => {handleClassSubmit(); checkClasses();}}>Submit</button>
+            <button onClick={() => {handleClassSubmit().then(() => {checkClasses();})}}>Submit</button>
         </div>
         <div className="footnote">
           <p>Created by Christian Zech</p>
