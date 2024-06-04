@@ -124,8 +124,8 @@ function App() {
             <label>Email:</label>
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email"/>
           </div>
-          <div className="class-submit">
-            <button onClick={() => {handleClassSubmit().then(() => {checkClasses();})}}>Submit</button>
+        <div className="class-submit">
+          <button onClick={() => {handleClassSubmit().then(() => {checkClasses();})}}>Submit</button>
         </div>
         <div className="footnote">
           <p>Created by Christian Zech</p>
