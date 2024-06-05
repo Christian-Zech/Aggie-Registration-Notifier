@@ -18,7 +18,7 @@ connection.connect();
 app.get("/api", (req, res) => {
     const selectAllRows = `SELECT * FROM accounts_notify WHERE email = '${req.query.email}';`; //Select query
     connection.query(selectAllRows, (err, rows) => {
-        if (err) throw err;
+        if (err) console.log(err);
         res.send(rows);
     })
 });
