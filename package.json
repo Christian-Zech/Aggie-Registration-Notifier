@@ -2,7 +2,6 @@
   "name": "aggie_course_notifier",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Christian-Zech.github.io/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
