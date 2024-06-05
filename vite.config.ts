@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://server.aggienotify.us:5000",
+        target: "http://server.aggienotify.us:5000/api",
         changeOrigin: true,
         secure: false
       }
