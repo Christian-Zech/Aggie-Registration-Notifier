@@ -18,7 +18,7 @@ connection.connect();
 app.get("/api", (req, res) => {
     const selectAllRows = `SELECT * FROM accounts_notify WHERE email = '${req.query.email}';`; //Select query
     connection.query(selectAllRows, (err, rows) => {
-        if (err) console.log(err);
+        if (err) throw err;
         res.send(rows);
     })
 });
@@ -26,7 +26,7 @@ app.get("/api", (req, res) => {
 
 app.post("/api", (req, res) => {
     const row = req.body.row;
-    const insertRowRequest = `INSERT INTO accounts_notify (email, class_name, class_sections) VALUES ('${row.email}', '${row.class_name.toUpperCase()}', '${row.class_sections}');`; //Insert query
+    const insertRowRequest = `INSERT INTO accounts_notify (email, class_name, class_sections, campus) VALUES ('${row.email}', '${row.class_name.toUpperCase()}', '${row.class_sections}', '${row.campus}');`; //Insert query
     connection.query(insertRowRequest, (err, rows) => {
         if (err) throw err;
         console.log("inserted " + row);

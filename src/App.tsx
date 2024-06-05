@@ -9,11 +9,24 @@ function App() {
   const [section, setSection] = useState('')
   const [email, setEmail] = useState('')
   const [classData, setClassData] = useState([])
+  const [campus, setCampus] = useState('College Station')
+
+
+  const campus_dictionary = {
+    0: "College Station",
+    1: "Galveston"
+  }
 
   const insertIntoDatabase = async () => {
 
+    let altered_campus = 0
+
+    if(campus === "Galveston") {
+      altered_campus = 1;
+    }
+
     await axios.post("/api", {
-      row: {email: email, class_name: subject + "-" + classNumber, class_sections: section}
+      row: {email: email, class_name: subject + "-" + classNumber, class_sections: section, campus: altered_campus}
     }).then(response => {
         console.log(response.data["message"])
       }).catch(error => {
@@ -91,8 +104,10 @@ function App() {
               {classData.length > 0 ?
               <tr>
                 <th>Email</th>
+                <th>Campus</th>
                 <th>Class Name</th>
                 <th>Class Sections</th>
+                <th>Delete</th>
               </tr>
               : <tr><th>No Classes</th></tr>}
             </thead>
@@ -101,8 +116,9 @@ function App() {
                 return (
                   <tr key={row['id']}>
                     <td>{row['email']}</td>
+                    <td>{campus_dictionary[row['campus']]}</td>
                     <td>{row['class_name']}</td>
-                    <td>{row['class_sections']}</td>
+                    <td id="sections">{row['class_sections']}</td>
                     <td><button onClick={() => {deleteClass(row['id']).then(() => {checkClasses()})}}>Remove</button></td>
                   </tr>
                 )
@@ -112,6 +128,12 @@ function App() {
         </div>
         <div className="class-forms">
             <h2>Add a class to your watchlist</h2>
+            <label>Campus:</label>
+            <select value={campus} onChange={(e) => {setCampus(e.target.value)}}>
+              <option value="College Station">College Station</option>
+              <option value="Galveston">Galveston</option>
+            </select>
+            <br/>
             <label>Subject (CSCE, MEEN, ENGR, etc.):</label>
             <input type="subject" value={subject} onChange={e => setSubject(e.target.value)} placeholder="Subject"/>
             <br/>
