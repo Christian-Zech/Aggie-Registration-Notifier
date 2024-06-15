@@ -107,19 +107,19 @@ function App() {
                 <th>Campus</th>
                 <th>Class Name</th>
                 <th>Class Sections</th>
-                <th>Delete</th>
+                <th>Remove</th>
               </tr>
               : <tr><th>No Classes</th></tr>}
             </thead>
             <tbody> 
               {classData.map((row) => {
                 return (
-                  <tr key={row['id']}>
-                    <td>{row['email']}</td>
-                    <td>{campus_dictionary[row['campus']]}</td>
-                    <td>{row['class_name']}</td>
-                    <td id="sections">{row['class_sections']}</td>
-                    <td><button onClick={() => {deleteClass(row['id']).then(() => {checkClasses()})}}>Remove</button></td>
+                  <tr key={row[0]}>
+                    <td>{row[4]}</td>
+                    <td>{campus_dictionary[row[3]]}</td>
+                    <td>{row[1]}</td>
+                    <td id="sections">{row[2]}</td>
+                    <td><button onClick={() => {deleteClass(row[0]).then(() => {checkClasses()})}}>Remove</button></td>
                   </tr>
                 )
               })}
