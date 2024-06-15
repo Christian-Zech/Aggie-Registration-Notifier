@@ -42,8 +42,6 @@ app.post("/api", (req, res) => {
         console.error(error);
     })
 
-    res.send({ message: "Post sucessfull!" });
-
 })
 
 app.delete("/api", (req, res) => {
