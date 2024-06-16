@@ -7,21 +7,54 @@ const port = 5000;
 app.use(express.json());
 
 
-async function performOperation(operation) {
+async function initialize() {
+
     try {
-        // Use the connection string copied from the cloud console
-        // and stored in connstring.txt file from Step 2 of this tutorial
-        const connection = await oracledb.getConnection({ user: process.env.DB_USER, password: process.env.DB_PASS, connectionString: process.env.DB_STRING});
-        const result = await connection.execute(operation, {}, {
-            autoCommit: true
+
+        await oracledb.createPool({
+            user          : process.env.DB_USER,
+            password      : process.env.DB_PASS,               // mypw contains the hr schema password
+            connectString : process.env.DB_STRING,
+            poolIncrement : 0,
+            poolMax       : 4,
+            poolMin       : 4
         });
-        return result;
     }
     catch (err) {
         console.error(err);
     }
 }
 
+
+async function performOperation(operation) {
+    let result;
+    let connection;
+    try {
+        // Use the connection string copied from the cloud console
+        // and stored in connstring.txt file from Step 2 of this tutorial
+        connection = await oracledb.getConnection();
+        result = await connection.execute(operation, {}, {
+            autoCommit: true
+        });
+        
+    }
+    catch (err) {
+        console.error(err);
+    }
+    finally {
+        if (connection) {
+            try {
+                await connection.close();
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+        return result;
+    }
+}
+
+initialize();
 
 app.get("/api", (req, res) => {
     const selectAllRows = `SELECT * FROM REACT.ACCOUNTS_NOTIFY WHERE EMAIL = '${req.query.email}'`; //Select query
