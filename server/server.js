@@ -13,7 +13,7 @@ async function initialize() {
 
         await oracledb.createPool({
             user          : process.env.DB_USER,
-            password      : process.env.DB_PASS,               // mypw contains the hr schema password
+            password      : process.env.DB_PASS,
             connectString : process.env.DB_STRING,
             poolIncrement : 0,
             poolMax       : 4,
