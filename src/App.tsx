@@ -17,6 +17,11 @@ function App() {
     1: "Galveston"
   }
 
+  const insertThenCheckClasses = async () => {
+    await handleClassSubmit()
+    checkClasses()
+  }
+
   const insertIntoDatabase = async () => {
 
     let altered_campus = 0
@@ -46,7 +51,7 @@ function App() {
       const sectionArr = section.split(',')
       for (let i = 0; i < sectionArr.length; i++) {
         if (sectionArr[i].length !== 3) {
-          alert('Please enter a valid section number')
+          alert('Please enter a valid section number. Include no spaces and seperate all numbers with commas or type ALL')
           return
         }
       }
@@ -93,7 +98,7 @@ function App() {
         </div> 
         <div className="email-form">
           <label>Email:</label>
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email"/>
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" onKeyDown={e => {if(e.key === "Enter") {checkClasses()}}}/>
         </div>
         <div className="email-submit">
           <button onClick={checkClasses}>Submit</button>
@@ -144,12 +149,13 @@ function App() {
             <input type="section" value={section} onChange={e => setSection(e.target.value)} placeholder="Section number"/>
             <br/>
             <label>Email:</label>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email"/>
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"/>
           </div>
         <div className="class-submit">
-          <button onClick={() => {handleClassSubmit().then(() => {checkClasses();})}}>Submit</button>
+          <button onClick={insertThenCheckClasses}>Submit</button>
         </div>
         <div className="footnote">
+          <p>This tool may not work for some classes that are subdivided into "topics."</p>
           <p>Created by Christian Zech</p>
         </div>
       </div>
