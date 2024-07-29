@@ -32,11 +32,9 @@ function App() {
 
     await axios.post("/api", {
       row: {email: email, class_name: subject + "-" + classNumber, class_sections: section, campus: altered_campus}
-    }).then(response => {
-        console.log(response.data["message"])
-      }).catch(error => {
+    }).catch(error => {
         console.log(error)
-      });
+    });
   }
 
 
