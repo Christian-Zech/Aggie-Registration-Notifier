@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const port = 5000;
 
-app.set('trust proxy', true)
 app.use(express.json());
 
 
@@ -69,7 +68,7 @@ app.get("/api", (req, res) => {
 
 app.post("/api", (req, res) => {
     const row = req.body.row;
-    const insertRowRequest = `INSERT INTO REACT.accounts_notify (email, class_name, class_sections, campus, ip_address) VALUES ('${row.email}', '${row.class_name.toUpperCase()}', '${row.class_sections}', '${row.campus}', '${req.ip}')`; //Insert query
+    const insertRowRequest = `INSERT INTO REACT.accounts_notify (email, class_name, class_sections, campus, ip_address) VALUES ('${row.email}', '${row.class_name.toUpperCase()}', '${row.class_sections}', '${row.campus}', '${req.headers['X-Forwarded-For']}')`; //Insert query
     performOperation(insertRowRequest).then((result) => {
         res.send({ message: "Insert sucessfull!" });
     }).catch((error) => {
