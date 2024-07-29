@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const port = 5000;
 
+app.set('trust proxy', true)
 app.use(express.json());
 
 
