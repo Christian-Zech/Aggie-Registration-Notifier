@@ -131,11 +131,12 @@ function App() {
         </div>
         <div className="class-forms">
             <h2>Add a class to your watchlist</h2>
-            <label>Campus:</label>
-            <select value={campus} onChange={(e) => {setCampus(e.target.value)}}>
-              <option value="College Station">College Station</option>
-              <option value="Galveston">Galveston</option>
-            </select>
+            <label>Campus:
+              <select value={campus} onChange={(e) => {setCampus(e.target.value)}}>
+                <option value="College Station">College Station</option>
+                <option value="Galveston">Galveston</option>
+              </select>
+            </label>
             <br/>
             <label>Subject (CSCE, MEEN, ENGR, etc.):</label>
             <input type="subject" value={subject} onChange={e => setSubject(e.target.value)} placeholder="Subject"/>
