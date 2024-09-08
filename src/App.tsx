@@ -4,6 +4,7 @@ import './App.css'
 
 
 function App() {
+  
   const [subject, setSubject] = useState('')
   const [classNumber, setClassNumber] = useState('')
   const [section, setSection] = useState('')
@@ -12,16 +13,18 @@ function App() {
   const [campus, setCampus] = useState('College Station')
 
 
-  const campus_dictionary = {
+  const campusDictionary = {
     0: "College Station",
     1: "Galveston"
   }
-
+  
+  /* Inserts frontend form data into the oracle database and then updates the frontend */
   const insertThenCheckClasses = async () => {
     await handleClassSubmit()
     checkClasses()
   }
 
+  /* sends a POST request to the backend to insert form data into the Oracle Database */
   const insertIntoDatabase = async () => {
 
     let altered_campus = 0
@@ -37,7 +40,7 @@ function App() {
     });
   }
 
-
+  /* Does basic checks to make sure the user's input is valid and then inserts the data into the Oracle database */
   const handleClassSubmit = async () => {
 
     if (subject === '' || classNumber === '' || section === '' || email === '') {
@@ -61,6 +64,7 @@ function App() {
     await insertIntoDatabase()
   }
 
+  /* updates frontend with current data from database */
   const checkClasses = () => {
 
     axios.get("/api", {
@@ -73,7 +77,8 @@ function App() {
         console.log(error)
       });
   }
-
+  
+  /* sends a DELETE request to the database with info gathered from the user */
   const deleteClass = async (id: number) => {
     await axios.delete("/api", {
       params: {
@@ -119,7 +124,7 @@ function App() {
                 return (
                   <tr key={row[0]}>
                     <td>{row[4]}</td>
-                    <td>{campus_dictionary[row[3]]}</td>
+                    <td>{campusDictionary[row[3]]}</td>
                     <td>{row[1]}</td>
                     <td id="sections">{row[2]}</td>
                     <td><button onClick={() => {deleteClass(row[0]).then(() => {checkClasses()})}}>Remove</button></td>
