@@ -18,7 +18,7 @@ You can view and use the live version of the website [here](https://aggienotify.
 - Python: There is a seperate python script that does the emailing using SMTP not included in this repository
 
 ### Contributing
-If you would like to improve this project, I am open to suggestions. You can submit pull requests if you would like. 
+If you would like to improve this project, I am open to new ideas and criticism. You can submit pull requests if you would like. 
 
 ### Contact
 If you have any questions or feedback, feel free to reach out via the issues section or contact me directly.
