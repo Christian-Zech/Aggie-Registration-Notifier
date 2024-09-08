@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# Aggie Registration Notifier
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the source code for a website created by me with the aim to help Texas A&M students get notified when the classes they want become available. This project is designed to assist users by monitoring class availability and sending alerts when a spot opens up.
 
-Currently, two official plugins are available:
+### Features
+- Class Monitoring: Users can input the classes they are interested in, and the system will monitor the availability.
+- Real-Time Notifications: Get instant notifications via email
+- User-Friendly Interface: Simple and intuitive interface for users to add and manage their class watchlist.
+- Easy registration: All any user needs to do is input their email and class they want.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Live Website
+You can view and use the live version of the website [here](https://aggienotify.us).
 
-## Expanding the ESLint configuration
+### Technologies Used
+- HTML/CSS/JavaScript: For the front-end design and user interaction.
+- Node.js: For backend logic and handling the class monitoring and notifications
+- Oracle SQL cloud database: Stores user emails so it can easily be retrieved
+- Python: There is a seperate python script that does the emailing using SMTP not included in this repository
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Contributing
+If you would like to improve this project, you can submit pull requests. 
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Contact
+If you have any questions or feedback, feel free to reach out via the issues section or contact me directly.
