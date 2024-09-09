@@ -12,7 +12,7 @@ This repository contains the source code for a website created by me with the ai
 You can view and use the live version of the website [here](https://aggienotify.us).
 
 ### Technologies Used
-- HTML/CSS/JavaScript: For the front-end design and user interaction.
+- HTML/CSS/JavaScript/React/Vue: For the front-end design and user interaction.
 - Node.js: For backend logic and handling database interactions
 - Oracle SQL cloud database: Stores user emails and desired class information so it can be easily retrieved
 - Python: There is a seperate python script that does the emailing using SMTP not included in this repository
