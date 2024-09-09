@@ -6,7 +6,7 @@ This repository contains the source code for a website created by me with the ai
 - Class Monitoring: Users can input the classes they are interested in, and the system will monitor the availability.
 - Real-Time Notifications: Get instant notifications via email
 - User-Friendly Interface: Simple and intuitive interface for users to add and manage their class watchlist.
-- Easy registration: All any user needs to do is input their email and class they want.
+- Ease of use: All any user needs to do is input their email and the classes they want.
 
 ### Live Website
 You can view and use the live version of the website [here](https://aggienotify.us).
