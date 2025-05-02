@@ -22,6 +22,7 @@ function App() {
   /* Inserts frontend form data into the oracle database and then updates the frontend */
   const insertThenCheckClasses = async () => {
     await handleClassSubmit()
+    setSemester('None')
     checkClasses()
   }
 
