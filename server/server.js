@@ -57,8 +57,14 @@ async function performOperation(operation) {
 initialize();
 
 app.get("/api", (req, res) => {
-    const selectAllRows = `SELECT * FROM REACT.ACCOUNTS_NOTIFY WHERE EMAIL = '${req.query.email}'`; //Select query
-    performOperation(selectAllRows).then((result) => {
+    let selectRows = "";
+    if(req.query.semester === "None") {
+        selectRows = `SELECT * FROM REACT.ACCOUNTS_NOTIFY WHERE (EMAIL = '${req.query.email}')`; //Select query
+    }
+    else {
+        selectRows = `SELECT * FROM REACT.ACCOUNTS_NOTIFY WHERE (EMAIL = '${req.query.email}' AND SEMESTER = '${req.query.semester}')`; //Select query
+    }
+    performOperation(selectRows).then((result) => {
         res.send(result.rows)
     }).catch((error) => {
         console.error(error);
@@ -68,7 +74,7 @@ app.get("/api", (req, res) => {
 
 app.post("/api", (req, res) => {
     const row = req.body.row;
-    const insertRowRequest = `INSERT INTO REACT.accounts_notify (email, class_name, class_sections, campus) VALUES ('${row.email}', '${row.class_name.toUpperCase()}', '${row.class_sections}', '${row.campus}')`; //Insert query
+    const insertRowRequest = `INSERT INTO REACT.accounts_notify (email, class_name, class_sections, campus, semester) VALUES ('${row.email}', '${row.class_name.toUpperCase()}', '${row.class_sections}', '${row.campus}', '${row.semester}')`; //Insert query
     performOperation(insertRowRequest).then((result) => {
         res.send({ message: "Insert sucessfull!" });
     }).catch((error) => {

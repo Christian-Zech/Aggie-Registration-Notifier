@@ -11,6 +11,7 @@ function App() {
   const [email, setEmail] = useState('')
   const [classData, setClassData] = useState([])
   const [campus, setCampus] = useState('College Station')
+  const [semester, setSemester] = useState('None')
 
 
   const campusDictionary = {
@@ -34,7 +35,7 @@ function App() {
     }
 
     await axios.post("/api", {
-      row: {email: email, class_name: subject + "-" + classNumber, class_sections: section, campus: altered_campus}
+      row: {email: email, class_name: subject + "-" + classNumber, class_sections: section, campus: altered_campus, semester: semester}
     }).catch(error => {
         console.log(error)
     });
@@ -58,6 +59,16 @@ function App() {
       }
     }
 
+    if(subject.length != 4) {
+      alert("Invalid subject number. Subject number needs to be 4 letters long.")
+      return
+    }
+
+    if (semester == "None") {
+      alert("Please select a semester")
+      return
+    }
+
     setSubject('')
     setClassNumber('')
     setSection('')
@@ -69,7 +80,8 @@ function App() {
 
     axios.get("/api", {
       params: {
-        email: email
+        email: email,
+        semester: semester
       }
     }).then(response => {
         setClassData(response.data)
@@ -103,6 +115,16 @@ function App() {
           <label>Email:</label>
           <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" onKeyDown={e => {if(e.key === "Enter") {checkClasses()}}}/>
         </div>
+        <div className="semester-dropDown">
+          <label>Filter by semester (optional):
+            <select value={semester} onChange={(e) => {setSemester(e.target.value)}}>
+                <option value="None"></option>
+                <option value="Fall">Fall</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+            </select>
+          </label>
+        </div>
         <div className="email-submit">
           <button onClick={checkClasses}>Submit</button>
         </div>
@@ -113,6 +135,7 @@ function App() {
               <tr>
                 <th>Email</th>
                 <th>Campus</th>
+                <th>Semester</th>
                 <th>Class Name</th>
                 <th>Class Sections</th>
                 <th>Remove</th>
@@ -125,6 +148,7 @@ function App() {
                   <tr key={row[0]}>
                     <td>{row[4]}</td>
                     <td>{campusDictionary[row[3]]}</td>
+                    <td>{row[5]}</td>
                     <td>{row[1]}</td>
                     <td id="sections">{row[2]}</td>
                     <td><button onClick={() => {deleteClass(row[0]).then(() => {checkClasses()})}}>Remove</button></td>
@@ -141,6 +165,15 @@ function App() {
                 <option value="College Station">College Station</option>
                 <option value="Galveston">Galveston</option>
               </select>
+            </label>
+            <br/>
+            <label>Semester:
+            <select value={semester} onChange={(e) => {setSemester(e.target.value)}}>
+                <option value="None"></option>
+                <option value="Fall">Fall</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+            </select>
             </label>
             <br/>
             <label>Subject (CSCE, MEEN, ENGR, etc.):</label>
