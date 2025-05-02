@@ -154,7 +154,6 @@ function App() {
           <button onClick={insertThenCheckClasses}>Submit</button>
         </div>
         <div className="footnote">
-          <p>This tool may not work for some classes that are subdivided into "topics."</p>
           <p>Created by Christian Zech</p>
         </div>
       </div>
